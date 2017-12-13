@@ -25,13 +25,29 @@ Relaxer *relaxer = [[Relaxer alloc] init];
 ### Parameters
 
 ```obj-c
+NSDictionary *bodyDict = [NSMutableDictionary dictionary];
 
+[bodyDict setValue:@"data" forKey:@"param1"];
+
+[relaxer request:@"GET" url:@"http://url.com" body:bodyDict headers:nil errorBlock:^(NSError * _Nonnull error) {
+   // handle error     
+} completion:^(Response * _Nonnull response) {
+   // handle response
+}];
 ```
 
 ### Headers
 
 ```obj-c
+NSDictionary *headersDict = [NSMutableDictionary dictionary];
 
+[headersDict setValue:@"data" forKey:@"header1"];
+
+[relaxer request:@"GET" url:@"http://url.com" body:nil headers:headersDict errorBlock:^(NSError * _Nonnull error) {
+   // handle error     
+} completion:^(Response * _Nonnull response) {
+   // handle response
+}];
 ```
 
 ### JSON Object
@@ -43,7 +59,7 @@ Relaxer *relaxer = [[Relaxer alloc] init];
 } completion:^(Response * _Nonnull response) {
   // handle response
   if(response.validate) {
-   if(response.jsonObject != nil) {
+   if(response.jsonObject) {
     // parse json object
    }
   } else {
@@ -61,8 +77,21 @@ Relaxer *relaxer = [[Relaxer alloc] init];
 } completion:^(Response * _Nonnull response) {
   // handle response
   if(response.validate) {
-    if(response.jsonArray != nil) {
+    if(response.jsonArray) {
       // parse json array
+      
+      NSError *error;
+      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+
+      if(!error) {
+         NSArray *fetchedArr = (NSArray *)json;
+
+        for (NSArray *arr in fetchedArr) {
+          // access values here
+        }
+      } else {
+        // handle error
+      }
     }
   } else {
     // response is not valid
@@ -72,15 +101,50 @@ Relaxer *relaxer = [[Relaxer alloc] init];
 
 ### File Upload
 
-File Upload without parameters.
+To get progress and feedback on your file upload, be sure  
+to implement the ```UploadDelegate``` Class.
+
+The ```fileKey``` parameter is the name of the 'input' for the file,  
+this is what the server is looking for in the upload.  
+
+The ```fileName``` parameter is the readable name of the file.
+
+The ```mime``` parameter is the file MIME type.
+
+The ```fileData``` parameter is an ```NSData``` object representing the file.  
+
+The ```body``` and ```headers``` parameter(s) are the same as in a regular API request. 
 
 ```obj-c
-
+Relaxer *relaxer = [[Relaxer alloc] init];
+ 
+[relaxer upload:@"POST" url:@"https://url.com" body:nil headers:nil fileKey:@"images" fileName:@"image.png" mime:@"png" fileData:data uploadDelegate:nil];
 ```
 
-File Upload with paramters.
+### File Upload Delegate
+
+Be sure to include the delegate.  
+
+```#import <Relaxful/UploadDelegate.h>```
 
 ```obj-c
+// upload finished
+- (void) uploadFinished:(Response *)response :(NSError *)error {
+  // handle upload finished
+  if(error) {
+    // handle error
+  } else {
+    // success
+}
+
+// progress update
+- (void) uploadProgress:(int64_t)bytesSent :(int64_t)totalBytesSent :(int64_t)totalBytesExpectedToSend {
+  // handle progress
+  int uploadProgress = totalBytesSent / totalBytesExpectedToSend;
+    
+  // set this on your UIProgressView
+  int progressPercent = uploadProgress*100;
+}
 
 ```
 
