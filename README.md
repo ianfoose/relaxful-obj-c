@@ -131,7 +131,7 @@ The ```body``` and ```headers``` parameter(s) are the same as in a regular API r
 ```obj-c
 Relaxer *relaxer = [[Relaxer alloc] init];
  
-[relaxer upload:@"POST" url:@"https://url.com" body:nil headers:nil fileKey:@"images" fileName:@"image.png" mime:@"png" fileData:data uploadDelegate:nil];
+[relaxer upload:@"POST" url:@"https://url.com" body:nil headers:nil fileKey:@"images" fileName:@"image" mime:@"png" fileData:data uploadDelegate:nil];
 ```
 
 ### File Upload Delegate
