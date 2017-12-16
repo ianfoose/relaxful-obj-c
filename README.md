@@ -1,9 +1,22 @@
 # Relaxful
 
 Relaxful is a REST API client written in Obj-C.
-Relaxful can be used on all Apple platforms, iOS,tvOS,watchOS, and macOS.  
 
 ## Use
+
+Relaxful can be used on all Apple platforms, iOS,tvOS,watchOS, and macOS.  
+
+## Build
+
+If not using CocoaPods, build each target and navigate to its  
+build directory to find the universal framework file.
+
+Drag this into your project and check 'Copy items if needed'.  
+Be sure to add your framework to the 'Embedded Binaries' of your project.  
+
+Import into your project
+
+```#import <Relaxful/Relaxer.h>```
 
 ### Simple Request
 
@@ -162,15 +175,3 @@ Accessable Properties are:
 - text, the HTTP Body
 - data, HTTP Body Data
 - headers, the response headers
-
-## Build
-
-If not using CocoaPods, build each target and navigate to its  
-build directory to find the universal framework file.
-
-Drag this into your project and check 'Copy items if needed'.  
-Be sure to add your framework to the 'Embedded Binaries' of your project.  
-
-Import into your project
-
-```#import <Relaxful/Relaxer.h>```
