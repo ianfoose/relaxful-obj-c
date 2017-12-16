@@ -148,6 +148,21 @@ Be sure to include the delegate.
 
 ```
 
+### Response
+
+A response object contains properties and formatted data from
+the API Call.
+
+Note: all properties are optional except for 'status'.
+
+Accessable Properties are:
+
+- response, the URLResponse
+- status, the HTTP Status
+- text, the HTTP Body
+- data, HTTP Body Data
+- headers, the response headers
+
 ## Build
 
 If not using CocoaPods, build each target and navigate to its  
