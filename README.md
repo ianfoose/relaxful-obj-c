@@ -8,11 +8,9 @@ Relaxful can be used on all Apple platforms, iOS,tvOS,watchOS, and macOS.
 
 ## Build
 
-If not using CocoaPods, build each target and navigate to its  
-build directory to find the universal framework file.
+If not using CocoaPods, build each target and navigate to its build directory to find the universal framework file.
 
-Drag this into your project and check 'Copy items if needed'.  
-Be sure to add your framework to the 'Embedded Binaries' of your project.  
+Drag this into your project and check 'Copy items if needed'.  Be sure to add your framework to the 'Embedded Binaries' of your project.  
 
 Import into your project
 
@@ -114,11 +112,9 @@ Relaxer *relaxer = [[Relaxer alloc] init];
 
 ### File Upload
 
-To get progress and feedback on your file upload, be sure  
-to implement the ```UploadDelegate``` Class.
+To get progress and feedback on your file upload, be sure to implement the ```UploadDelegate``` Class.
 
-The ```fileKey``` parameter is the name of the 'input' for the file,  
-this is what the server is looking for in the upload.  
+The ```fileKey``` parameter is the name of the 'input' for the file, this is what the server is looking for in the upload.  
 
 The ```fileName``` parameter is the readable name of the file.
 
@@ -163,12 +159,11 @@ Be sure to include the delegate.
 
 ### Response
 
-A response object contains properties and formatted data from
-the API Call.
+A response object contains properties and formatted data from the API Call.
 
 Note: all properties are optional except for 'status'.
 
-Accessable Properties are:
+### Accessable Properties are:
 
 - response, the URLResponse
 - status, the HTTP Status
